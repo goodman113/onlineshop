@@ -10,18 +10,18 @@ from .form import SignupForm
 from django.contrib.auth.decorators import login_required
 
 from functools import wraps
-def admin_only(function):
-    @wraps(function)
-    def wrap(request, *args, **kwargs):
-        profile=request.user
-        if profile.is_staff:
-            return function(request,*args, **kwargs)
-        else:
-            return redirect('cart')
+# def admin_only(function):
+#     @wraps(function)
+#     def wrap(request, *args, **kwargs):
+#         profile=request.user
+#         if profile.is_staff:
+#             return function(request,*args, **kwargs)
+#         # else:
+            #     return redirect('cart')
 
-    return wrap
+#     return wrap
 
-@admin_only
+# @admin_only
 def homeView(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -47,10 +47,7 @@ def homeView(request):
     categories = Category.objects.all().order_by('id')
     hotproducts = Products.objects.all().order_by('-stock')
     products = Products.objects.filter(category=categories[0])
-    states = States.objects.all()
-    country = Country.objects.all()
-    print(states)
-    return render(request, 'index.html', {'category':categories, 'products':products, 'hotproduct':hotproducts, "order_details":order_details, 'soni':len(order_details), 'total_price':total_price, 'states':states, 'country':country})
+    return render(request, 'index.html', {'category':categories, 'products':products, 'hotproduct':hotproducts, "order_details":order_details, 'soni':len(order_details), 'total_price':total_price})
 def productDetailView(request, id):
     try:
         product = Products.objects.get(id=id)
@@ -94,6 +91,7 @@ def cartView(request):
     # user = authenticate(request=request, username='admin2', password='muham1612mad')
     # login(request=request, user=user)
     order, status = Orders.objects.get_or_create(customer=request.user, done_status=False)
+    print(status)
     order_details = Order_details.objects.filter(order=order)
     total_price = sum([ i.real_price for i in order_details])
     return render(request, 'cart.html', {'order_details':order_details, 'soni':len(order_details), 'total_price':total_price})
@@ -131,4 +129,6 @@ def CheckoutView(request):
     print(status)
     order_details = Order_details.objects.filter(order=order)
     total_price = sum([ i.real_price for i in order_details])
-    return render(request, 'checkout.html', {'allsum':total_price})
+    states = States.objects.all()
+    country = Country.objects.all()
+    return render(request, 'checkout.html', {'allsum':total_price, 'states':states, 'country':country})
