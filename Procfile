@@ -1,1 +1,1 @@
-web: gonicorn online-shop.wsgi
+web: gunicorn online-shop.wsgi
