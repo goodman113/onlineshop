@@ -184,7 +184,7 @@
 											<span>Total</span>
 											<span class="total-amount">{{ total_price }}</span>
 										</div>
-										<a href="checkout.html" class="btn animate">Checkout</a>
+										<a href="{% url 'checkout' %}" class="btn animate">Checkout</a>
 									</div>
 								</div>
 								<!--/ End Shopping Item -->
@@ -280,7 +280,7 @@
 													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
 														<ul class="dropdown">
 															<li><a href="{% url 'cart' %}">Cart</a></li>
-															<li><a href="checkout.html">Checkout</a></li>
+															<li><a href="{% url 'checkout' %}">Checkout</a></li>
 														</ul>
 													</li>
 													<li><a href="#">Pages</a></li>									
@@ -494,26 +494,33 @@
                     <div class="owl-carousel popular-slider">
 						<!-- Start Single Product -->
 						{% for i in products %}
-								<a href="{% url 'prdetail' i.id %}">
+						<div class="single-product">
+							<div class="product-img">
+								<a href="/product/{{ i.id }}">	
 									<img class="default-img" src="{{ i.image.url }}" alt="#">
+									<img class="hover-img" src="{{ i.image.url }}" alt="#">
 								</a>
 								<div class="button-head">
-									<div class="product-action">
+									<div data-product_id='2' data-price='29' class="product-action">
 										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+										<a title="Wishlist" href=""><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+										<a title="Compare" href=""><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 									</div>
 									<div onclick="addtocart({{ i.id }})" data-product_id='2' data-price='29'  class="product-action-2">
-									<a title="Add to cart" >Add to cart</a>
+										<a title="Add to cart" >Add to cart</a>
 									</div>
 								</div>
-							<div class="product-content">
-								<h3><a href="{% url 'prdetail' i.id %}">{{ i.name }}</a></h3>
-								<div class="product-price">
-									<span class="old">${{ i.price }}</span>
-									<span>${{i.real_price}}</span>
+								<div class="product-content">
+									<h3><a href="{% url 'prdetail' i.id %}">{{ i.name }}</a></h3>
+									<div class="product-price">
+										<span class="old" >${{ i.price }}</span>
+									</div>
+									<div class="product-price">
+										<span>${{ i.real_price }}</span>
+									</div>
 								</div>
 							</div>
+						</div>
 						{% endfor %}
 						<!-- End Single Product -->
 						

@@ -102,7 +102,7 @@
 								<ul class="list-main">
 									<li><i class="ti-location-pin"></i> Store location</li>
 									<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-									<li><i class="ti-user"></i> <a href="#">My account</a></li>
+									<li><i class="ti-user"></i> <a href="#">{{ request.user.username }}</a></li>
 									<li><i class="ti-power-off"></i><a href="{% url 'login' %}">Login</a></li>
 								</ul>
 							</div>
@@ -184,7 +184,7 @@
 												<span>Total</span>
 												<span class="total-amount">$134.00</span>
 											</div>
-											<a href="checkout.html" class="btn animate">Checkout</a>
+											<a href="{% url 'checkout' %}" class="btn animate">Checkout</a>
 										</div>
 									</div>
 									<!--/ End Shopping Item -->
@@ -211,8 +211,8 @@
 													<li><a href="#">Service</a></li>
 													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
 														<ul class="dropdown">
-															<li><a href="cart.html">Cart</a></li>
-															<li><a href="checkout.html">Checkout</a></li>
+															<li><a href="{% url 'cart' %}">Cart</a></li>
+															<li><a href="{% url 'checkout' %}">Checkout</a></li>
 														</ul>
 													</li>
 													<li><a href="#">Pages</a></li>									
@@ -624,7 +624,7 @@
 	
 	<!-- Jquery -->
     <script src="{%  static 'template/js/jquery.min.js'%}"></script>
-    <script src="{%  static 'js/main.js'%}"></script>
+    <script src="{%  static 'template/js/main.js'%}"></script>
 	<script src="{%  static 'template/js/jquery-ui.min.js'%}"></script>
 	<!-- Popper JS -->
 	<script src="{%  static 'template/js/popper.min.js'%}"></script>
