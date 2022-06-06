@@ -8,5 +8,6 @@ urlpatterns = [
     path('cart/', cartView, name='cart'),
     path('quantitychange/',quantChangeView, name='quanntychange'),
     path('cart-delete/', cartDeleteView, name='quanntychange'),
-    path('checkout', CheckoutView, name='checkout')
+    path('checkout', CheckoutView, name='checkout'),
+    path('like', likeView,  name='like')
 ]

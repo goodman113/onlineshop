@@ -49,7 +49,7 @@
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 							</div>
-							<span class="review-no">41 reviews</span>
+							<span class="review-no">{{ likes }} ta likes</span>
 						</div>
 						<p class="product-description">{{ product.description }}</p>
 						<h4 class="price">current price: <span>${{ product.real_price }}</span></h4>
@@ -66,8 +66,13 @@
 							<span class="color blue"></span>
 						</h5>
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">add to cart</button>
+							<button class="add-to-cart btn btn-default" onclick="addtocart({{ i.id }})" type="button">add to cart</button>
+							{% if likestatus %}
+							<button class="like btn btn-default" type="button"><a onclick="like_function({{ i.id }})" id="likesection_{{ i.id }}"></a><i class="fa fa-heart" style="font-size:22;color:red"></i></button>
+							{% else %}
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+
+							{% endif %}
 						</div>
 					</div>
 				</div>

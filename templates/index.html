@@ -50,7 +50,6 @@
 
 <body class="js">
 
-
 	<script>
 		function getCookie(name) {
 			let cookieValue = null;
@@ -415,7 +414,7 @@
 															<div class="button-head">
 																<div data-product_id='2' data-price='29' class="product-action">
 																	<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																	<a title="Wishlist" href=""><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+																	<a title="Wishlist" onclick="like_function({{ i.id }})" id="likesection_{{ i.id }}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
 																	<a title="Compare" href=""><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 																</div>
 																<div onclick="addtocart({{ i.id }})" data-product_id='2' data-price='29'  class="product-action-2">
@@ -1017,5 +1016,10 @@
 	<script src="{% static 'template/js/easing.js'%}"></script>
 	<!-- Active JS -->
 	<script src="{% static 'template/js/active.js'%}"></script>
+	
+<script>
+	all_likes({{ wishlist }})
+</script>
+
 </body>
 </html>

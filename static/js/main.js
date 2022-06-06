@@ -28,7 +28,7 @@ function render_category(cat_id) {
                             <div class="button-head">
                                 <div data-product_id='2' data-price='29' class="product-action">
                                     <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                    <a title="Wishlist" href=""><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                    <a title="Wishlist" id='likesection_${data[i].id}' onclick="likefunction(${data[i].id})"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
                                     <a title="Compare" href=""><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                 </div>
                                 <div data-product_id='2' data-price='29'  class="product-action-2">
@@ -81,8 +81,8 @@ function plus_minus_button(plusminus, id) {
         document.getElementById(`quant_${id}`).value=soni+1
     }}
     else{
-    soni = document.getElementById(`quant_${id}`).value
-    soni = parseInt(soni)
+        soni = document.getElementById(`quant_${id}`).value
+        soni = parseInt(soni)
     if (soni>1){
     document.getElementById(`quant_${id}`).value = soni-1
 }}
@@ -156,4 +156,39 @@ function delete_ord_det(ord_id){
                 window.location = '/cart/'
             })
         })
+}
+
+function like_function(product_id){
+    console.log(product_id)
+    var url = '/like'
+    fetch(url, {
+        method:'POST',
+        headers:{
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
+    },
+    body:JSON.stringify( {
+
+        'product_id': product_id
+    })
+    })
+        .then((response) => {
+            response.json().then((data) => {
+                if (data['like']){
+                    console.log(data)
+                    document.getElementById(`likesection_${product_id}`).innerHTML = `<i class="fa fa-heart" style="font-size:22;color:red"></i><span>Add to Wishlist</span>`
+                }
+                else {
+                    document.getElementById(`likesection_${product_id}`).innerHTML = `<i class=" ti-heart "></i><span>Add to Wishlist</span>`   
+                }
+            })
+        })
+}
+
+function all_likes(data) {
+    console.log(data)
+    for (i=0;i<data.length;i++){
+        document.getElementById(`likesection_${data[i]}`).innerHTML = `<i class="fa fa-heart" style="font-size:22;color:red"></i><span>Add to Wishlist</span>`
+    }
+    
 }
